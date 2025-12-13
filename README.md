@@ -113,6 +113,13 @@ The ATS (Applicant Tracking System) score is calculated using a weighted, rule-b
 ### 4️⃣ Edit Resume
 ![Edit Resume](screenshots/4_edit_resume.png)
 
+## 🎥 Demo Video
+
+Watch the full demo here:
+👉 https://youtu.be/S4Dw7VWpxyc
+
+
+
 ---
 
 ### 5️⃣ ATS Score Improvement After Edit
