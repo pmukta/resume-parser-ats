@@ -41,7 +41,6 @@ This project simulates how modern ATS systems evaluate resumes using weighted sc
 ## ⚙️ How to Run Locally
 
 ### 1️⃣ Clone the repository
-```bash
 git clone https://github.com/YOUR_USERNAME/resume-parser-ats.git
 cd resume-parser-ats
 
@@ -91,5 +90,32 @@ The ATS (Applicant Tracking System) score is calculated using a weighted, rule-b
 - Detailed experience and education are rewarded
 - Scores rarely reach 100% to maintain realism
 - ATS breakdown highlights missing or weak sections
-- Actionable improvement suggestions are generated dynamically
+
+---
+
+## 📸 Screenshots
+
+### 1️⃣ Upload Resume
+![Upload Resume](screenshots/1_upload_resume.png)
+
+---
+
+### 2️⃣ All Resumes List with ATS Scores
+![All Resumes](screenshots/2_all_resumes_list.png)
+
+---
+
+### 3️⃣ Resume Details & ATS Breakdown
+![ATS Breakdown](screenshots/3_resume_details_ats.png)
+
+---
+
+### 4️⃣ Edit Resume
+![Edit Resume](screenshots/4_edit_resume.png)
+
+---
+
+### 5️⃣ ATS Score Improvement After Edit
+![Updated ATS Score](screenshots/5_updated_ats_score.png)
+- ---
 
