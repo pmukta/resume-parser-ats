@@ -1,0 +1,9 @@
+Django>=5.0
+python-dotenv
+Pillow
+PyMuPDF
+pdfminer.six
+python-docx
+groq
+PyPDF2
+pytesseract

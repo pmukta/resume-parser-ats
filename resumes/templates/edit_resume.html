@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Edit Resume</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" value="{{ resume.name }}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" value="{{ resume.email }}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input type="text" name="mobile" value="{{ resume.mobile }}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Skills</label>
+            <textarea name="skills" class="form-control" rows="4">{{ resume.skills }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Experience</label>
+            <textarea name="experience" class="form-control" rows="4">{{ resume.experience }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Education</label>
+            <textarea name="education" class="form-control" rows="4">{{ resume.education }}</textarea>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">
+                Save Changes
+            </button>
+            <a href="{% url 'resumes:view_resume' resume.id %}" class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

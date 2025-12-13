@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Resume Results{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-3">
+      <div class="card-body text-center">
+        <h6>ATS: Applicant Tracking System</h6>
+        <div id="atsWrap" class="mx-auto circle-progress">
+          <!-- Circular progress drawn by JS -->
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <path class="bg"
+                  d="M18 2.0845
+                     a 15.9155 15.9155 0 0 1 0 31.831
+                     a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <path id="progress" class="progress"
+                  stroke-dasharray="0,100"
+                  d="M18 2.0845
+                     a 15.9155 15.9155 0 0 1 0 31.831
+                     a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <text x="18" y="20.35" class="percentage" font-size="6" text-anchor="middle">
+              {{ data.ats_score|default:0 }}%
+            </text>
+          </svg>
+        </div>
+        <p class="mt-2 small text-muted">Higher ATS score = better chance of passing automated screening.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h6>Contact</h6>
+        <p><strong>Name:</strong> {{ data.name }}</p>
+        <p><strong>Email:</strong> {{ data.email }}</p>
+        <p><strong>Phone:</strong> {{ data.mobile }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Professional Summary</h5>
+        <p>{{ data.professional_summary|default:"No summary extracted." }}</p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Skills Identified</h5>
+        {% if data.skills %}
+          <ul>
+            {% for s in data.skills %}
+              <li>{{ s }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No skills detected.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Experience Timeline</h5>
+        {% if data.experience_timeline %}
+          <ul>
+            {% for e in data.experience_timeline %}
+              <li>{{ e.company }} — {{ e.designation }} ({{ e.start }} - {{ e.end }})</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No experience details found.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>ATS Improvement Tips</h5>
+        {% if data.ats_improvement_tips %}
+          <ul>
+            {% for tip in data.ats_improvement_tips %}
+              <li>{{ tip }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No tips generated.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h6>Strengths</h6>
+            {% if data.strengths %}
+              <ul>{% for s in data.strengths %}<li>{{ s }}</li>{% endfor %}</ul>
+            {% else %}
+              <p class="text-muted">No strengths extracted.</p>
+            {% endif %}
+          </div>
+          <div class="col-md-6">
+            <h6>Weaknesses</h6>
+            {% if data.weaknesses %}
+              <ul>{% for w in data.weaknesses %}<li>{{ w }}</li>{% endfor %}</ul>
+            {% else %}
+              <p class="text-muted">No weaknesses extracted.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Draw circular progress based on server value
+  (function(){
+    const score = parseInt("{{ data.ats_score|default:0 }}", 10) || 0;
+    const circle = document.getElementById('progress');
+    if (!circle) return;
+    // dasharray: percent, 100-percent
+    const dash = Math.max(0, Math.min(100, score));
+    circle.setAttribute('stroke-dasharray', dash + ",100");
+    // color based on score
+    circle.style.stroke = (dash >= 70) ? "#0d6efd" : (dash >= 40 ? "#ffc107" : "#dc3545");
+  })();
+</script>
+<style>
+  .circular-chart { display:block; margin: 0 auto; max-width: 140px; max-height:140px; }
+  .circular-chart .bg { fill: none; stroke: #eee; stroke-width: 3.8; }
+  .circular-chart .progress { fill: none; stroke-width: 3.8; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 18px 18px; }
+  .circular-chart .percentage { fill: #444; font-family: sans-serif; font-weight: 600; }
+</style>
+{% endblock %}

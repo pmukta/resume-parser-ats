@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Resume Details</h2>
+
+    <div class="card p-3">
+        <p><strong>Name:</strong> {{ resume.name }}</p>
+        <p><strong>Email:</strong> {{ resume.email }}</p>
+        <p><strong>Phone:</strong> {{ resume.mobile }}</p>
+        <p>
+            <strong>ATS Score:</strong>
+            <span class="badge
+                {% if resume.ats_score >= 70 %}
+                    bg-success
+                {% elif resume.ats_score >= 40 %}
+                    bg-warning
+                {% else %}
+                    bg-danger
+                {% endif %}">
+                {{ resume.ats_score }}%
+            </span>
+            <hr>
+
+            <h5>ATS Breakdown</h5>
+            <ul class="list-group mb-3">
+                {% for item, status in breakdown %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ item }}
+                        {% if status == "ok" %}
+                            <span class="badge bg-success">OK</span>
+                        {% elif status == "weak" %}
+                            <span class="badge bg-warning text-dark">Needs Improvement</span>
+                        {% else %}
+                            <span class="badge bg-danger">Missing</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% if suggestions %}
+            <h5>How to Improve ATS Score</h5>
+            <ul>
+                {% for tip in suggestions %}
+                    <li>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </p>
+
+        <p class="mt-2">
+            {% if resume.ats_score >= 70 %}
+                ✅ Highly ATS Compatible
+            {% elif resume.ats_score >= 40 %}
+                ⚠️ Moderately ATS Compatible
+            {% else %}
+                ❌ Low ATS Compatibility
+            {% endif %}
+        </p>
+
+
+        <hr>
+
+        <h5>Skills</h5>
+        <p>{{ resume.skills|default:"Not found" }}</p>
+
+        <h5>Experience</h5>
+        <p>{{ resume.experience|default:"Not found" }}</p>
+
+        <h5>Education</h5>
+        <p>{{ resume.education|default:"Not found" }}</p>
+
+        <div class="mt-4">
+            <a href="{% url 'resumes:edit_resume' resume.id %}" class="btn btn-primary">
+                Edit
+            </a>
+            <a href="{% url 'resumes:resume_list' %}" class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
