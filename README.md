@@ -125,4 +125,10 @@ Watch the full demo here:
 ### 5️⃣ ATS Score Improvement After Edit
 ![Updated ATS Score](screenshots/5_updated_ats_score.png)
 - ---
+## 🎥 Demo Video
+
+Watch the full demo here:
+👉 https://youtu.be/S4Dw7VWpxyc
+
+
 
